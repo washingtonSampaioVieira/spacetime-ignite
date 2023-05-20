@@ -11,7 +11,7 @@ app.register(cors, {
 })
 
 app.register(jwt, {
-  secret: 'spacetime',
+  secret: 'secretjwtspacetime',
 })
 
 app.register(memoriesRoutes)
@@ -22,5 +22,5 @@ app
     port: 3333,
   })
   .then(() => {
-    console.log('HTTP Server running on htt://localhost:3333')
+    console.log('HTTP Server running on http://localhost:3333')
   })

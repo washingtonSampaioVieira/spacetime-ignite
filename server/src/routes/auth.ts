@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import axios from 'axios'
-import { prisma, prisma } from '../lib/prisma'
+import { prisma } from '../lib/prisma'
 
 export async function authRoutes(app: FastifyInstance) {
   app.post('/register', async (request) => {
@@ -26,9 +26,9 @@ export async function authRoutes(app: FastifyInstance) {
       },
     )
 
-    const { accessToken } = accessTokenResponse.data.access_token
+    const accessToken = accessTokenResponse.data.access_token
 
-    const userResponse = await axios.get('https://github.com/user', {
+    const userResponse = await axios.get('https://api.github.com/user', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -70,6 +70,7 @@ export async function authRoutes(app: FastifyInstance) {
         expiresIn: '7 days',
       },
     )
+
     return { token }
   })
 }

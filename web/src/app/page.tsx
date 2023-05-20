@@ -1,11 +1,13 @@
-import { User } from 'lucide-react'
-import Image from 'next/image'
+import { cookies } from 'next/headers'
 import { Copyright } from '@/components/CopyRight'
 import { Hero } from '@/components/Hero'
 import { Singin } from '@/components/Signin'
 import { EmptyMemories } from '@/components/EmptyMemories'
+import { Profile } from '@/components/Profile'
 
 export default function Home() {
+  const isAuthenticated = cookies().has('token')
+
   return (
     <main className="grid min-h-screen grid-cols-2 bg-[url(../assets/bg-stars.svg)] bg-cover">
       {/** Left */}
@@ -15,7 +17,9 @@ export default function Home() {
 
         {/** Stripes */}
         <div className="border-r/10 absolute bottom-0 right-2 top-0 w-2 bg-stripes" />
-        <Singin />
+
+        {isAuthenticated ? <Profile /> : <Singin />}
+
         <Hero />
         <Copyright />
       </div>
